@@ -15,13 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@getHome')->name('home');
 
-Route::get('/catalog', 'CatalogController@getIndex')->name('catalogIndex');
+Route::group(['prefix' => '/catalog'], function () {
+    Route::get('/', 'CatalogController@getIndex')->name('catalogIndex');
 
-Route::get('/catalog/show/{id}', 'CatalogController@getShow')->name('catalogShow');
+    Route::get('/show/{id}', 'CatalogController@getShow')->name('catalogShow');
 
-Route::get('/catalog/create', 'CatalogController@getCreate')->name('catalogCreate');
+    Route::get('/create', 'CatalogController@getCreate')->name('catalogCreate');
+    Route::post('/crear', 'CatalogController@setCreate')->name('crear');
 
-Route::get('/catalog/edit/{id}', 'CatalogController@getEdit')->name('catalogEdit');
+    Route::get('/edit/{id}', 'CatalogController@getEdit')->name('catalogEdit');
+    Route::post('/editar/{id}', 'CatalogController@setEdit')->name('editar');
+});
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -30,3 +34,18 @@ Route::get('/login', function () {
 Route::get('/logout', function () {
     return view('auth.logout');
 })->name('logout');
+
+
+/**********************************************
+
+Route::get('/catalog', 'CatalogController@getIndex')->name('catalogIndex');
+
+Route::get('/catalog/show/{id}', 'CatalogController@getShow')->name('catalogShow');
+
+Route::get('/catalog/create', 'CatalogController@getCreate')->name('catalogCreate');
+Route::post('/crear', 'CatalogController@setCreate')->name('crear');
+
+Route::get('/catalog/edit/{id}', 'CatalogController@getEdit')->name('catalogEdit');
+Route::post('/editar/{id}', 'CatalogController@setEdit')->name('editar');
+
+****************************************************/
