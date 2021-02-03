@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@getHome')->name('home');
+Route::get('/home', 'HomeController@getHome')->name('home');
 
-Route::group(['prefix' => '/catalog'], function () {
+Route::group(['prefix' => '/catalog', 'middleware' => 'auth'], function () {
     Route::get('/', 'CatalogController@getIndex')->name('catalogIndex');
 
     Route::get('/show/{id}', 'CatalogController@getShow')->name('catalogShow');

@@ -6,7 +6,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        @if( true || Auth::check() )
+        @if( Auth::check() )
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create')? 'active' : ''}}">
@@ -22,7 +22,7 @@
                     </li>
                 </ul>
 
-                <ul class="navbar-nav navbar-right">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <form action="{{ url('/logout') }}" method="POST" style="display:inline">
                             @csrf
@@ -33,6 +33,22 @@
                     </li>
                 </ul>
             </div>
+        @else
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item {{  Request::is('login') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{url('/login')}}">
+                        Iniciar sesión
+                    </a>
+                </li>
+                <li class="nav-item {{  Request::is('register') ? 'active' : ''}}">
+                    <a class="nav-link" href="{{url('/register')}}">
+                        Registrarse
+                    </a>
+                </li>
+            </ul>
+        </div>
         @endif
     </div>
 </nav>
